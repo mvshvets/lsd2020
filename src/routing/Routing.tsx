@@ -1,11 +1,11 @@
 import './Routing.scss'
 
 import React, { FC, useContext, useMemo } from 'react'
-import { MainPage, NotFoundPage, ProfilePage, Categories, Questions, Subcategories } from 'pages'
+import { NotFoundPage, Services } from 'pages'
 import { LoaderContext } from 'core/context'
 
 import { ROUTE_NAMES } from './routeNames.const'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 export const Routing: FC = React.memo(() => {
     const { loaderState } = useContext(LoaderContext)
@@ -24,27 +24,12 @@ export const Routing: FC = React.memo(() => {
             <Switch>
                 {/* Главная страница */}
                 <Route path={ROUTE_NAMES.MAIN} exact>
-                        <Categories/>
+                    <Redirect to={ROUTE_NAMES.SERVICES}/>
                 </Route>
 
-                {/* Личный кабинет */}
-                <Route path={ROUTE_NAMES.PROFILE} >
-                        <ProfilePage/>
-                </Route>
-
-                {/* Таблица категорий */}
-                <Route path={ROUTE_NAMES.CATEGORIES} >
-                    <Categories/>
-                </Route>
-
-                {/* Таблица подкатегорий */}
-                <Route path={ROUTE_NAMES.SUBCATEGORIES} >
-                    <Subcategories/>
-                </Route>
-
-                {/* Таблица вопросов */}
-                <Route path={ROUTE_NAMES.QUESTIONS} >
-                    <Questions/>
+                {/* Главная страница */}
+                <Route path={ROUTE_NAMES.SERVICES}>
+                    <Services/>
                 </Route>
 
                 {/* Ловушка неизвестных роутов */}

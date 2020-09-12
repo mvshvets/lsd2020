@@ -22,8 +22,6 @@ export type ComponentProps =
     | TextAreaControlProps
     | TreeSelectControlProps<number[]>
 
-export type CloneControlValuesProps = string | number | undefined
-
 /**
  * @param name = имя для поля
  * @param component = компонент, который необходимо размножить

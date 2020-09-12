@@ -3,7 +3,7 @@ import './Header.sass'
 import React, { FC, useCallback, useContext, useState } from 'react'
 import { LoaderContext } from 'core/context'
 import { useHistory } from 'react-router-dom'
-import { MainMenu } from './components'
+//import { MainMenu } from './components'
 import { Button } from 'antd'
 import { ROUTE_NAMES } from 'routing'
 import { Link } from 'react-router-dom'
@@ -37,10 +37,10 @@ export const Header: FC = React.memo(() => {
     return (
         <header className="header">
             <Link to={ROUTE_NAMES.MAIN}>
-                <h1><i>СВсП</i></h1>
+                <h1><i>Алиса Help</i></h1>
             </Link>
             <div className="header__menu-wrapper">
-                <MainMenu/>
+                {/*<MainMenu/>*/}
                 {userData ? <Button onClick={handleLogout}>ВЫХОД</Button> : <PopupAdapter
                     component={AuthModal}
                     formId="authForm"

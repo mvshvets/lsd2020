@@ -1,8 +1,5 @@
 import moment, { Moment } from 'moment'
 import { DataNode } from 'rc-tree-select/lib/interface'
-import { IconsAdapter } from '../components/IconsAdapter'
-import { Button, Divider } from 'antd'
-import React from 'react'
 
 interface NormalizeDataForTreeSelectProps {
     [key: string]: any
@@ -40,22 +37,3 @@ export const normalizeDataForTreeSelect = (
         key: el.id,
     }
 }
-
-/**
- * Рендер кнопки-ссылки для выпадающего меню селекта
- * @param url - адрес для ссылки
- * @param title
- */
-export const renderQuestionnairesDropdown = (url: string, title?: string) => (
-    menu: React.ReactElement
-) => (
-    <div>
-        {menu}
-        <Divider />
-        <a href={url} target="_blank" rel="noopener noreferrer">
-            <Button icon={<IconsAdapter iconType="PlusCircleOutlined" />}>
-                {title || 'Создать шаблон'}
-            </Button>
-        </a>
-    </div>
-)

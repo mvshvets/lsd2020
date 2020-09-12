@@ -1,20 +1,20 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { ContentTitle, PageContent } from 'core/components'
-import { Table } from 'antd'
-import { TABLE_EMPTY_MESSAGE } from 'shared/consts'
-import { QUESTIONS_TABLE_COLUMNS } from './Questions.const'
-import { PopupAdapter } from 'shared/popups'
 import { LoaderContext } from 'core/context'
-import { ConfirmDeleteForm } from 'shared/forms'
-import { CATEGORIES_MOCK } from 'mocks'
-import { QuestionsModel } from './Questions.model'
 import { ButtonsToolbar } from 'shared/components'
-import { QuestionsForm } from './components'
+import { PopupAdapter } from 'shared/popups'
+import { Table, Button } from 'antd'
+import { TABLE_EMPTY_MESSAGE } from 'shared/consts'
+import { ConfirmDeleteForm } from 'shared/forms'
+import { SERVICES_MOCK } from 'mocks'
+import { ServicesModel } from '../Services.model'
+import { Link } from 'react-router-dom'
+import { ROUTE_NAMES } from 'routing'
+import { SERVICES_TABLE_COLUMNS } from './Services.consts'
 
-/** Таблица вопросов */
-export const Questions: React.FC = React.memo(() => {
+export const ServicesPage: React.FC = React.memo(() => {
     const { setLoaderState } = useContext(LoaderContext)
-    const [dictionary, setDictionary] = useState<QuestionsModel[]>([])
+    const [dictionary, setDictionary] = useState<ServicesModel[]>([])
 
     /**
      * Запрос справочника
@@ -23,8 +23,8 @@ export const Questions: React.FC = React.memo(() => {
         try {
             setLoaderState(true)
 
-            console.log('Запрос за таблицей вопросов')
-            setDictionary(CATEGORIES_MOCK.questions)
+            console.log('Запрос за таблицей услуг для Алисы')
+            setDictionary(SERVICES_MOCK)
         } catch (e) {
             console.log(e)
         } finally {
@@ -56,38 +56,25 @@ export const Questions: React.FC = React.memo(() => {
 
     return (
         <PageContent>
-
-            <ContentTitle title="Вопросы" />
+            <ContentTitle title="Услуги" />
 
             <ButtonsToolbar>
-                <PopupAdapter
-                    component={QuestionsForm}
-                    formId="QuestionsForm"
-                    buttonText="Создать вопрос"
-                    onRequestFinish={handleRequestFinish}
-                    modalOptions={{
-                        title: 'Новый вопрос',
-                        footer: null,
-                    }}
-                />
+                <Link
+                    to={ROUTE_NAMES.SERVICES_CREATE}
+                    className="like-button"
+                >
+                    <Button>Создать</Button>
+                </Link>
             </ButtonsToolbar>
 
             <Table
                 rowKey="id"
                 locale={{ emptyText: TABLE_EMPTY_MESSAGE }}
-                columns={QUESTIONS_TABLE_COLUMNS}
+                columns={SERVICES_TABLE_COLUMNS}
                 dataSource={dictionary}
+                pagination={false}
             />
-            <PopupAdapter
-                component={QuestionsForm}
-                formId="ConfirmEditForm"
-                onRequestFinish={handleRequestFinish}
-                haveButton={false}
-                modalOptions={{
-                    title: 'Изменить вопрос',
-                    footer: null,
-                }}
-            />
+
             <PopupAdapter
                 component={ConfirmDeleteForm}
                 formId="ConfirmDeleteForm"

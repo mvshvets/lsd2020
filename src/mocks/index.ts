@@ -1,1 +1,1 @@
-export * from './CategoriesMock'
+export * from './ServicesMock'

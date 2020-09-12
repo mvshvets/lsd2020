@@ -1,6 +1,5 @@
 export const SELECT_SEARCH_PLACEHOLDER_DEFAULT = 'Введите или выберите'
 export const SELECT_PLACEHOLDER_DEFAULT = 'Выберите вариант'
 export const INPUT_PLACEHOLDER_DEFAULT = 'Введите значение'
-export const VALIDATE_MESSAGE_DEFAULT = 'Обязательное поле'
 export const INPUT_NUMBER_PLACEHOLDER_DEFAULT = '0'
 export const UPLOAD_IMAGE_PLACEHOLDER_DEFAULT = 'Добавить изображение'

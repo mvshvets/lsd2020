@@ -3,7 +3,7 @@ import React, { FC, useCallback } from 'react'
 import { DocumentTitleContext } from './DocumentTitleContext'
 
 export const DocumentTitleContextProvider: FC = React.memo(({ children }) => {
-    document.title = 'Система взаимодействия с гражданами'
+    document.title = 'Алиса Help'
 
     const updateTitle = useCallback(
         (newTitle: string) => (document.title = newTitle),
