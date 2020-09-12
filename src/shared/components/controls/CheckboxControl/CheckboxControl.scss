@@ -1,0 +1,30 @@
+@import '~shared/styles/controls';
+
+$checkboxBgColor: #f4f4f4;
+$checkboxColorsChecked: #367aaf;
+
+.checkbox-control,
+.checkbox-group-control {
+    .ant-checkbox-inner {
+        width: $g_icon_size;
+        height: $g_icon_size;
+        background-color: $checkboxBgColor;
+        border: 1px solid $g_input_border_color;
+        border-radius: 0;
+    }
+
+    .ant-checkbox-checked {
+        .ant-checkbox-inner {
+            background-color: $checkboxColorsChecked;
+            border-color: $checkboxColorsChecked;
+        }
+    }
+
+    .ant-checkbox-disabled {
+        .ant-checkbox-inner {
+            background-color: $checkboxBgColor;
+            border-color: $g_input_border_color;
+            opacity: 0.8;
+        }
+    }
+}

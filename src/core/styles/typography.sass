@@ -1,0 +1,45 @@
+@import '../../shared/styles/const'
+
+body
+    font-family: 'Roboto', sans-serif
+    color: $g_text_color
+
+h1
+    font-size: 32px
+    line-height: 1
+    font-weight: 500
+    margin-bottom: 23px
+
+h2
+    font-size: 21px
+    line-height: 1
+    margin-bottom: 24px
+    font-weight: 700
+
+    &:not(:first-child)
+        margin-top: 20px
+        margin-bottom: 6px
+
+h3
+    font-size: 18px
+    line-height: 1.25
+
+@media screen and (min-width: $g_screen_md)
+    h1
+        font-size: 36px
+
+    h2
+        font-size: 24px
+
+    h3
+        font-size: 21px
+
+@media screen and (min-width: $g_screen_xl)
+    h1
+        font-size: 42px
+
+    h2
+        font-size: 30px
+
+    h3
+        font-size: 24px

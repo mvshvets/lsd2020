@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React  from 'react'
+import { ConfigProvider } from 'antd'
+import ru_RU from 'antd/es/locale/ru_RU'
+import './App.sass'
+import { Header, Footer } from 'core/components'
+import { Compose } from 'shared/components'
+import { Routing } from 'routing'
+import { DocumentTitleContextProvider, LoaderContextProvider, UserContextProvider, ModalsContextProvider } from 'core/context'
+import { BrowserRouter } from 'react-router-dom'
+import { Popups } from 'shared/popups'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export const App: React.FC = () => {
+    return <div className="app">
+        <ConfigProvider locale={ru_RU}>
+            <Compose
+                components={[
+                    BrowserRouter,
+                    LoaderContextProvider,
+                    UserContextProvider,
+                    DocumentTitleContextProvider,
+                    ModalsContextProvider
+                ]}
+            >
+                <Header/>
+
+                <Routing />
+
+                <Footer/>
+
+                <Popups/>
+            </Compose>
+        </ConfigProvider>
     </div>
-  );
 }
-
-export default App;

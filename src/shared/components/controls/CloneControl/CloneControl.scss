@@ -1,0 +1,34 @@
+@import '~shared/styles/controls';
+@import '~shared/styles/const';
+
+.clone-control {
+    &__row {
+        .ant-form-item-control-input-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .ant-form-item {
+            margin-bottom: 0;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .form-control {
+            width: 100%;
+            padding-right: 10px;
+        }
+    }
+
+    &__add {
+        color: $g_text_color !important;
+
+        &.ant-btn-link {
+            color: $g_text_color;
+        }
+
+        .anticon {
+            color: #1890ff;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+$scroll_width: 10px
+$scroll_height: 10px
+
+$scroll_thumb: #7ba3c8
+$scroll_border_radius: 3px
+
+.scroll
+    overflow: auto
+
+    &::-webkit-scrollbar
+        width: $scroll_width
+        height: $scroll_height
+
+    &::-webkit-scrollbar-thumb
+        background: $scroll_thumb
+        border-radius: $scroll_border_radius
+
+    &:hover::-webkit-scrollbar-thumb
+        background: darken($color: $scroll_thumb, $amount: 20)
+
+    &::-webkit-scrollbar-track
+        background-color: lighten($color: $scroll_thumb, $amount: 30)

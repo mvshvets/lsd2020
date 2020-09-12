@@ -1,0 +1,23 @@
+@import '~shared/styles/const';
+@import '~shared/styles/controls';
+
+.select-control {
+    .ant-select-selector {
+        border: 1px solid $g_input_border_color;
+    }
+
+    &__dropdown {
+        .ant-select-item {
+            &:hover {
+                background-color: $g_select_row_bg_color_hover;
+                color: $g_text_color;
+            }
+
+            &-option-selected {
+                background-color: $g_select_row_bg_color_checked;
+                color: #ffffff;
+                font-weight: normal;
+            }
+        }
+    }
+}

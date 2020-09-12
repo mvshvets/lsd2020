@@ -1,0 +1,32 @@
+@import '~shared/styles/const';
+
+.buttons-toolbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    &_no-margin {
+        margin-bottom: 0;
+    }
+
+    .like-button {
+        display: inline-block;
+
+        &_block {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .ant-btn-icon-only {
+        width: auto;
+    }
+
+    button, .like-button {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,105 @@
+@import '~shared/styles/const';
+@import '~shared/styles/controls';
+
+$selectRowTransition: 300ms;
+$tagBgColor: #cd163f;
+$tagFontSize: 14px;
+$tagBorderRadius: 10px;
+$tagAndOptionPadding: 8px 15px;
+$tagItemElMargin: 5px;
+$iconSize: 7px;
+
+.multi-select-control {
+    width: 100%;
+
+    .ant-select-selector {
+        border: 1px solid $g_input_border_color;
+    }
+
+    &_has-tags-cloud {
+        .ant-select-selection-item {
+            display: none;
+        }
+    }
+
+    &__dropdown {
+        padding: 0;
+        border: 1px solid $g_input_border_color;
+
+        .ant-select-tree-treenode {
+            padding: $tagAndOptionPadding;
+            transition: $selectRowTransition;
+
+            &:hover {
+                background-color: $g_select_row_bg_color_hover;
+                color: $g_text_color;
+            }
+
+            &-checkbox-checked {
+                color: #ffffff;
+                background-color: $g_select_row_bg_color_checked;
+                font-weight: normal;
+
+                .ant-select-tree-checkbox-inner {
+                    background-color: transparent;
+                    border: 0;
+                }
+            }
+        }
+
+        .ant-select-tree-switcher {
+            .ant-select-tree-switcher-icon {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .ant-select-tree-node-content-wrapper {
+            transition: none;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+.multi-select-tags {
+    margin-top: $tagItemElMargin * 2;
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+        background-color: $tagBgColor;
+        display: flex;
+        align-items: center;
+        font-size: $tagFontSize;
+        color: #ffffff;
+        padding: $tagAndOptionPadding;
+        border-radius: $tagBorderRadius;
+        margin-right: $tagItemElMargin;
+        margin-bottom: $tagItemElMargin;
+        line-height: 1;
+        cursor: pointer;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        span {
+            margin-right: $tagItemElMargin;
+        }
+
+        i {
+            width: $iconSize;
+            height: $iconSize;
+            background-image: url(../../../image/icon-cancel.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+            position: relative;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@import '~shared/styles/controls';
+
+.input-number-control {
+    display: inline-block;
+    min-width: auto;
+
+    &_full-width {
+        width: 100%;
+
+        .ant-input-number {
+            width: 100%;
+        }
+    }
+}

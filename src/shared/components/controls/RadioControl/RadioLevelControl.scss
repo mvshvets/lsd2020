@@ -1,0 +1,100 @@
+@import '~shared/styles/const';
+
+@mixin level-borders {
+    border: 1px solid #f4f4f4;
+}
+
+@mixin grid-part-size {
+    width: 114px;
+    height: 28px;
+}
+
+.radio-level-control {
+    height: 28px;
+
+    .ant-col {
+        display: flex;
+    }
+
+    .ant-radio-group {
+        width: 100%;
+        position: relative;
+        min-height: 28px;
+    }
+
+    .ant-radio {
+        display: none;
+
+        & + span {
+            display: block;
+            padding: 0;
+        }
+
+        &-checked + span {
+            .radio-level-control__grid {
+                span {
+                    background-color: #cadff2;
+                }
+            }
+            .radio-level-control__label {
+                color: $g_text_color;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__group-label {
+        color: $g_text_color;
+        line-height: 1;
+    }
+
+    &__level {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        &:first-child {
+            background-color: #ffffff;
+        }
+
+        &:hover {
+            .radio-level-control__grid {
+                span {
+                    background-color: #367aaf;
+                }
+            }
+
+            .radio-level-control__label {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__label {
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+        line-height: 28px;
+        transition: 300ms;
+        opacity: 0;
+        color: #ffffff;
+        @include level-borders;
+        @include grid-part-size;
+    }
+
+    &__grid {
+        display: flex;
+
+        span {
+            @include level-borders;
+            @include grid-part-size;
+            flex-grow: 1;
+            transition: 300ms;
+
+            &:last-child {
+                @include level-borders;
+            }
+        }
+    }
+}

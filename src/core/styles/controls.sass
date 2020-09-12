@@ -1,0 +1,48 @@
+@import '~shared/styles/const'
+@import '~shared/styles/controls'
+
+.form-control
+    font-size: $g_input_font_size_md
+    min-width: $g_input_min_width
+    color: $g_text_color
+
+    .ant-select-lg,
+    .ant-input-lg
+        font-size: $g_input_font_size_lg
+
+    .ant-select-sm,
+    .ant-input-sm
+        font-size: $g_input_font_size_sm
+
+    .ant-input,
+    .ant-picker
+        border: 1px solid $g_input_border_color
+        color: $g_text_color
+
+.ant-form-item-has-error .ant-input-number-focused,
+.ant-form-item-has-error .ant-picker-focused,
+.ant-form-item-has-error .ant-input-number:focus,
+.ant-form-item-has-error .ant-picker:focus,
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input:hover,
+.ant-form-item-has-error .ant-input-affix-wrapper:hover
+    background-color: #fff
+    border-color: $g_error_color
+
+.ant-form-item-has-error .ant-form-item-explain,
+.ant-form-item-has-error .ant-form-item-split
+    color: $g_error_color
+
+.ant-form-item
+    align-items: center
+    margin-bottom: 10px
+
+.ant-form-item-label
+    white-space: inherit
+
+    & > label
+        height: auto
+        align-items: inherit
+        color: #999999
+        padding-left: 10px
