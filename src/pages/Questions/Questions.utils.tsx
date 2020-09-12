@@ -1,27 +1,31 @@
 import React from 'react'
-/**
- * Рендер кнопок управления для записи таблицы категорий
- * @param tableRow одна запись таблицы
- */
-import { Link } from 'react-router-dom'
-import { ROUTE_NAMES } from 'routing'
-import { Button } from 'antd'
 import { IconsAdapter, ButtonsToolbar } from 'shared/components'
 import { PopupAdapter } from 'shared/popups'
 import { QuestionsModel } from './Questions.model'
 
-export const renderCategoriesActions = (tableRow: QuestionsModel) => {
+/**
+ * Рендер кнопок управления для записи таблицы категорий
+ * @param tableRow одна запись таблицы
+ */
+export const renderQuestionsActions = (tableRow: QuestionsModel) => {
     return (
             <ButtonsToolbar>
-                <Link
-                    to={`${ROUTE_NAMES.CATALOGUE_EVENTS_EDIT}/${tableRow.id}`}
-                    className="like-button"
-                >
-                    <Button
-                        type="link"
-                        icon={<IconsAdapter iconType="EditOutlined" />}
-                    />
-                </Link>
+                <PopupAdapter
+                    formId="ConfirmEditForm"
+                    buttonText=""
+                    havePopup={false}
+                    buttonOption={{
+                        type: 'link',
+                        icon: <IconsAdapter iconType="EditOutlined" />,
+                    }}
+                    formOptions={{
+                        initialValues: tableRow,
+                    }}
+                    modalOptions={{
+                        title: 'Изменить вопрос',
+                        footer: null,
+                    }}
+                />
                 <PopupAdapter
                     formId="ConfirmDeleteForm"
                     buttonText=""

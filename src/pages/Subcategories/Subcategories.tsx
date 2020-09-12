@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { ContentTitle, PageContent } from 'core/components'
-import { Table, Button } from 'antd'
+import { Table } from 'antd'
 import { TABLE_EMPTY_MESSAGE } from 'shared/consts'
 import { SUBCATEGORIES_TABLE_COLUMNS } from './Subcategories.const'
 import { PopupAdapter } from 'shared/popups'
@@ -8,9 +8,8 @@ import { LoaderContext } from 'core/context'
 import { ConfirmDeleteForm } from 'shared/forms'
 import { CATEGORIES_MOCK } from 'mocks'
 import { SubcategoriesModel } from './Subcategories.model'
-import { useFilter } from 'shared/hooks'
-import { IconsAdapter, ButtonsToolbar } from 'shared/components'
-import { SubcategoriesFilters, SubcategoriesForm } from './components'
+import { ButtonsToolbar } from 'shared/components'
+import { SubcategoriesForm } from './components'
 
 /** Страница подкатегорий */
 export const Subcategories: React.FC = React.memo(() => {
@@ -18,12 +17,7 @@ export const Subcategories: React.FC = React.memo(() => {
     const [dictionary, setDictionary] = useState<SubcategoriesModel[]>([])
 
     /**
-     * Хук для фильтров
-     */
-    const [visibleFilter, triggerFilterVisibility] = useFilter()
-
-    /**
-     * Запрос за справочником
+     * Запрос справочника
      */
     const dictionaryFetch = useCallback(async () => {
         try {
@@ -66,12 +60,6 @@ export const Subcategories: React.FC = React.memo(() => {
             <ContentTitle title="Подкатегории" />
 
             <ButtonsToolbar>
-                <Button
-                    onClick={triggerFilterVisibility}
-                    icon={<IconsAdapter iconType="FilterOutlined" />}
-                >
-                    Фильтры
-                </Button>
                 <PopupAdapter
                     component={SubcategoriesForm}
                     formId="SubcategoriesForm"
@@ -84,15 +72,21 @@ export const Subcategories: React.FC = React.memo(() => {
                 />
             </ButtonsToolbar>
 
-            {visibleFilter && (
-                <SubcategoriesFilters/>
-            )}
-
             <Table
                 rowKey="id"
                 locale={{ emptyText: TABLE_EMPTY_MESSAGE }}
                 columns={SUBCATEGORIES_TABLE_COLUMNS}
                 dataSource={dictionary}
+            />
+            <PopupAdapter
+                component={SubcategoriesForm}
+                formId="ConfirmEditForm"
+                onRequestFinish={handleRequestFinish}
+                haveButton={false}
+                modalOptions={{
+                    title: 'Изменить подкатегорию',
+                    footer: null,
+                }}
             />
             <PopupAdapter
                 component={ConfirmDeleteForm}

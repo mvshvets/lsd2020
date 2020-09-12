@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { ContentTitle, PageContent } from 'core/components'
-import { Table, Button } from 'antd'
+import { Table } from 'antd'
 import { TABLE_EMPTY_MESSAGE } from 'shared/consts'
 import { QUESTIONS_TABLE_COLUMNS } from './Questions.const'
 import { PopupAdapter } from 'shared/popups'
@@ -8,9 +8,8 @@ import { LoaderContext } from 'core/context'
 import { ConfirmDeleteForm } from 'shared/forms'
 import { CATEGORIES_MOCK } from 'mocks'
 import { QuestionsModel } from './Questions.model'
-import { useFilter } from 'shared/hooks'
-import { IconsAdapter, ButtonsToolbar } from 'shared/components'
-import { QuestionsFilters, QuestionsForm } from './components'
+import { ButtonsToolbar } from 'shared/components'
+import { QuestionsForm } from './components'
 
 /** Таблица вопросов */
 export const Questions: React.FC = React.memo(() => {
@@ -18,12 +17,7 @@ export const Questions: React.FC = React.memo(() => {
     const [dictionary, setDictionary] = useState<QuestionsModel[]>([])
 
     /**
-     * Хук для фильтров
-     */
-    const [visibleFilter, triggerFilterVisibility] = useFilter()
-
-    /**
-     * Запрос за справочником
+     * Запрос справочника
      */
     const dictionaryFetch = useCallback(async () => {
         try {
@@ -66,12 +60,6 @@ export const Questions: React.FC = React.memo(() => {
             <ContentTitle title="Вопросы" />
 
             <ButtonsToolbar>
-                <Button
-                    onClick={triggerFilterVisibility}
-                    icon={<IconsAdapter iconType="FilterOutlined" />}
-                >
-                    Фильтры
-                </Button>
                 <PopupAdapter
                     component={QuestionsForm}
                     formId="QuestionsForm"
@@ -84,15 +72,21 @@ export const Questions: React.FC = React.memo(() => {
                 />
             </ButtonsToolbar>
 
-            {visibleFilter && (
-                <QuestionsFilters/>
-            )}
-
             <Table
                 rowKey="id"
                 locale={{ emptyText: TABLE_EMPTY_MESSAGE }}
                 columns={QUESTIONS_TABLE_COLUMNS}
                 dataSource={dictionary}
+            />
+            <PopupAdapter
+                component={QuestionsForm}
+                formId="ConfirmEditForm"
+                onRequestFinish={handleRequestFinish}
+                haveButton={false}
+                modalOptions={{
+                    title: 'Изменить вопрос',
+                    footer: null,
+                }}
             />
             <PopupAdapter
                 component={ConfirmDeleteForm}

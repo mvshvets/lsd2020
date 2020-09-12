@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { ContentTitle, PageContent } from 'core/components'
-import { Table, Button } from 'antd'
+import { Table } from 'antd'
 import { TABLE_EMPTY_MESSAGE } from 'shared/consts'
 import { CATEGORIES_TABLE_COLUMNS } from './Categories.const'
 import { PopupAdapter } from 'shared/popups'
@@ -8,9 +8,8 @@ import { LoaderContext } from 'core/context'
 import { ConfirmDeleteForm } from 'shared/forms'
 import { CATEGORIES_MOCK } from 'mocks'
 import { CategoriesModel } from './Categories.model'
-import { useFilter } from 'shared/hooks'
-import { IconsAdapter, ButtonsToolbar } from 'shared/components'
-import { CategoriesForm, CategoriesFilters } from './components'
+import { ButtonsToolbar } from 'shared/components'
+import { CategoriesForm } from './components'
 
 /** Страница категорий */
 export const Categories: React.FC = React.memo(() => {
@@ -18,12 +17,7 @@ export const Categories: React.FC = React.memo(() => {
     const [dictionary, setDictionary] = useState<CategoriesModel[]>([])
 
     /**
-     * Хук для фильтров
-     */
-    const [visibleFilter, triggerFilterVisibility] = useFilter()
-
-    /**
-     * Запрос за справочником
+     * Запрос справочника
      */
     const dictionaryFetch = useCallback(async () => {
         try {
@@ -65,12 +59,6 @@ export const Categories: React.FC = React.memo(() => {
             <ContentTitle title="Категории" />
 
             <ButtonsToolbar>
-                <Button
-                    onClick={triggerFilterVisibility}
-                    icon={<IconsAdapter iconType="FilterOutlined" />}
-                >
-                    Фильтры
-                </Button>
                 <PopupAdapter
                     component={CategoriesForm}
                     formId="CategoriesForm"
@@ -83,15 +71,21 @@ export const Categories: React.FC = React.memo(() => {
                 />
             </ButtonsToolbar>
 
-            {visibleFilter && (
-                <CategoriesFilters/>
-            )}
-
             <Table
                 rowKey="id"
                 locale={{ emptyText: TABLE_EMPTY_MESSAGE }}
                 columns={CATEGORIES_TABLE_COLUMNS}
                 dataSource={dictionary}
+            />
+            <PopupAdapter
+                component={CategoriesForm}
+                formId="ConfirmEditForm"
+                onRequestFinish={handleRequestFinish}
+                haveButton={false}
+                modalOptions={{
+                    title: 'Изменить категорию',
+                    footer: null,
+                }}
             />
             <PopupAdapter
                 component={ConfirmDeleteForm}
