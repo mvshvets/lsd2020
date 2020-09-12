@@ -1,5 +1,5 @@
 import { ColumnsType } from 'antd/lib/table'
-import { renderCategoriesActions } from './Questions.utils'
+import { renderQuestionsActions } from './Questions.utils'
 import { QuestionsModel } from './Questions.model'
 
 export const QUESTIONS_TABLE_COLUMNS: ColumnsType<QuestionsModel> = [
@@ -19,7 +19,7 @@ export const QUESTIONS_TABLE_COLUMNS: ColumnsType<QuestionsModel> = [
     {
         title: '',
         width: 100,
-        render: renderCategoriesActions,
+        render: renderQuestionsActions,
         align: 'right',
     }
 ]

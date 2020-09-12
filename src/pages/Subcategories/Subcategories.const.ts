@@ -1,5 +1,5 @@
 import { ColumnsType } from 'antd/lib/table'
-import { renderCategoriesActions } from './Subcategories.utils'
+import { renderSubcategoriesActions } from './Subcategories.utils'
 import { SubcategoriesModel } from './Subcategories.model'
 
 export const SUBCATEGORIES_TABLE_COLUMNS: ColumnsType<SubcategoriesModel> = [
@@ -18,7 +18,7 @@ export const SUBCATEGORIES_TABLE_COLUMNS: ColumnsType<SubcategoriesModel> = [
     {
         title: '',
         width: 100,
-        render: renderCategoriesActions,
+        render: renderSubcategoriesActions,
         align: 'right',
     }
 ]

@@ -28,7 +28,7 @@ export const normalizeDataForTreeSelect = (
     if (el.units?.length) {
         return {
             value: el.id,
-            title: el.name,
+            title: el.title,
             children: el.units.map(normalizeDataForTreeSelect),
             key: el.id,
         }
@@ -36,7 +36,7 @@ export const normalizeDataForTreeSelect = (
 
     return {
         value: el.id,
-        title: el.name,
+        title: el.title,
         key: el.id,
     }
 }

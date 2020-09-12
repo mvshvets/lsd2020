@@ -24,7 +24,7 @@ export const Routing: FC = React.memo(() => {
             <Switch>
                 {/* Главная страница */}
                 <Route path={ROUTE_NAMES.MAIN} exact>
-                        <MainPage/>
+                        <Categories/>
                 </Route>
 
                 {/* Личный кабинет */}

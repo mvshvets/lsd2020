@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext } from 'react'
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'antd'
 import {
     ButtonsToolbar,
@@ -7,11 +7,13 @@ import {
 import { LABEL_COL_FULL } from 'shared/consts'
 import { LoaderContext } from 'core/context'
 import { PopupAdapterFormProps } from 'shared/popups/PopupAdapter.model'
-import { TagsType } from '../../../../shared/components/controls/MultiSelectControl/MultiSelectControlProps.model'
-import { renderQuestionnairesDropdown } from '../../../../shared/utils'
-import { ROUTE_NAMES } from '../../../../routing'
+import { TagsType } from 'shared/components/controls/MultiSelectControl/MultiSelectControlProps.model'
+import { normalizeDataForTreeSelect, renderQuestionnairesDropdown } from 'shared/utils'
+import { ROUTE_NAMES } from 'routing'
+import { CATEGORIES_MOCK } from 'mocks'
+import { DataNode } from 'rc-tree-select/lib/interface'
 
-/** Форма добавления/редактирования подкатегорий */
+/** Форма добавления/редактирования вопросов */
 export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
     ({
         onRequestFinish = () => {
@@ -25,6 +27,7 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
         ...props
     }) => {
         const { setLoaderState } = useContext(LoaderContext)
+        const [dictionary, setDictionary] = useState<DataNode[]>([])
 
         /**
          * Обработчик отправки формы
@@ -52,6 +55,21 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
             [initialValues, onRequestFinish, setLoaderState]
         )
 
+        /**
+         * Запрос справочника
+         */
+        const dictionaryFetch = useCallback(async () => {
+            try {
+                setDictionary(CATEGORIES_MOCK.categories.map(normalizeDataForTreeSelect))
+            } catch (e) {
+                console.log(e)
+            }
+        }, [setLoaderState])
+
+        useEffect(() => {
+            dictionaryFetch()
+        }, [dictionaryFetch])
+
         return (
             <Form
                 onFinish={handleFinish}
@@ -59,7 +77,7 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
                 initialValues={initialValues}
             >
                 <Form.Item
-                    name="name"
+                    name="question"
                     label="Вопрос"
                     labelCol={LABEL_COL_FULL}
                     labelAlign="left"
@@ -68,7 +86,7 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
                 </Form.Item>
 
                 <Form.Item
-                    name="shortAnswer"
+                    name="answer"
                     label="Краткий ответ"
                     labelCol={LABEL_COL_FULL}
                     labelAlign="left"
@@ -77,7 +95,7 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
                 </Form.Item>
 
                 <Form.Item
-                    name="fullAnswer"
+                    name="long_answer"
                     label="Развернутый ответ"
                     labelCol={LABEL_COL_FULL}
                     labelAlign="left"
@@ -86,16 +104,16 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
                 </Form.Item>
 
                 <Form.Item
-                    name="childSubcategories"
+                    name="parent"
                     label="Входит в подкатегории"
                     labelCol={LABEL_COL_FULL}
                     labelAlign="left"
                 >
                     <MultiSelectControl
-                        treeData={[]}
+                        treeData={dictionary}
                         showSearch
                         allowClear
-                        tagsType={TagsType.ListView}
+                        tagsType={TagsType.List}
                         dropdownRender={renderQuestionnairesDropdown(
                             ROUTE_NAMES.SUBCATEGORIES,
                             'Добавить подкатегорию'
@@ -109,7 +127,7 @@ export const QuestionsForm: FC<PopupAdapterFormProps> = React.memo(
                         type="primary"
                         htmlType="submit"
                     >
-                        Создать
+                        {initialValues?.id ? 'Изменить' : 'Создать'}
                     </Button>
                     <Button onClick={onCancelSubmit}>Отмена</Button>
                 </ButtonsToolbar>
