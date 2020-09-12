@@ -4,10 +4,14 @@ import { ModalsContext } from './ModalsContext'
 import { ModalsOptionsProps } from '.'
 
 export const ModalsContextProvider: FC = React.memo(({ children }) => {
-    const [modalsOptions, setModalsOptions] = useState<ModalsOptionsProps>({})
+    const [popupAdapterOptions, setPopupAdapterOptions] = useState<
+        ModalsOptionsProps
+    >({})
 
     return (
-        <ModalsContext.Provider value={{ modalsOptions, setModalsOptions }}>
+        <ModalsContext.Provider
+            value={{ popupAdapterOptions, setPopupAdapterOptions }}
+        >
             {children}
         </ModalsContext.Provider>
     )

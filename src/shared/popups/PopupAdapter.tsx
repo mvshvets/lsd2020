@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react'
 import { Button, Modal } from 'antd'
-import { LoaderContext, ModalsContext } from 'core/context'
+import { LoaderContext, ModalsContext, ModalsOptionsProps } from 'core/context'
 
 import { PopupAdapterProps } from './PopupAdapter.model'
 
@@ -20,47 +20,54 @@ export const PopupAdapter: React.FC<PopupAdapterProps> = React.memo(
         rowSelectionType,
     }) => {
         const { loaderState } = useContext(LoaderContext)
-        const { modalsOptions, setModalsOptions } = useContext(ModalsContext)
+        const { popupAdapterOptions, setPopupAdapterOptions } = useContext(
+            ModalsContext
+        )
+
+        const getRestPopupAdapterOptions = useCallback(
+            (prevState: ModalsOptionsProps) => ({
+                recordCopy,
+                formOptions: {
+                    ...prevState[formId]?.formOptions,
+                    initialValues: formOptions?.initialValues,
+                },
+                modalOptions: {
+                    ...prevState[formId]?.modalOptions,
+                    ...modalOptions,
+                    title: modalOptions?.title || 'Добавить запись',
+                    okText: modalOptions?.okText || 'Отправить',
+                },
+            }),
+            [formId, formOptions, modalOptions, recordCopy]
+        )
 
         const closeModal = useCallback(
             () =>
-                setModalsOptions({
-                    ...modalsOptions,
+                setPopupAdapterOptions((prevState) => ({
+                    ...prevState,
                     [formId]: {
+                        ...prevState[formId],
                         visible: false,
                     },
-                }),
-            [formId, modalsOptions, setModalsOptions]
+                })),
+            [formId, setPopupAdapterOptions]
         )
 
         const showModal = useCallback(
             () =>
-                setModalsOptions({
-                    ...modalsOptions,
+                setPopupAdapterOptions((prevState: ModalsOptionsProps) => ({
+                    ...prevState,
                     [formId]: {
+                        ...prevState[formId],
                         visible: true,
-                        recordCopy,
-                        formOptions: {
-                            initialValues: formOptions?.initialValues,
-                        },
-                        modalOptions: {
-                            title: modalOptions?.title,
-                            okText: modalOptions?.okText,
-                        },
+                        ...getRestPopupAdapterOptions(prevState),
                     },
-                }),
-            [
-                formId,
-                formOptions,
-                modalOptions,
-                modalsOptions,
-                recordCopy,
-                setModalsOptions,
-            ]
+                })),
+            [formId, getRestPopupAdapterOptions, setPopupAdapterOptions]
         )
 
         /**
-         * Хук, вызывается в случае успешной отправки формы
+         * Обработчик успешной отправки формы
          */
         const handleRequestFinish = useCallback(() => {
             if (onRequestFinish) return onRequestFinish(closeModal)
@@ -69,14 +76,6 @@ export const PopupAdapter: React.FC<PopupAdapterProps> = React.memo(
         const handleCancel = useCallback(() => {
             closeModal()
         }, [closeModal])
-
-        /**
-         * Берет из контекста начальные значения для формы, если они есть
-         */
-        const getInitialValues = useCallback(() => {
-            if (modalsOptions[formId]?.formOptions?.initialValues)
-                return modalsOptions[formId].formOptions?.initialValues
-        }, [formId, modalsOptions])
 
         return (
             <>
@@ -95,17 +94,21 @@ export const PopupAdapter: React.FC<PopupAdapterProps> = React.memo(
                         }}
                         onCancel={handleCancel}
                         destroyOnClose
-                        {...modalOptions}
-                        {...modalsOptions[formId]}
+                        visible={popupAdapterOptions[formId]?.visible}
+                        {...popupAdapterOptions[formId]?.modalOptions}
                     >
                         <Component
                             onRequestFinish={handleRequestFinish()}
                             deleteFormAction={deleteFormAction}
                             id={formId}
                             {...formOptions}
-                            recordCopy={modalsOptions[formId]?.recordCopy}
-                            initialValues={getInitialValues()}
+                            recordCopy={popupAdapterOptions[formId]?.recordCopy}
+                            initialValues={
+                                popupAdapterOptions[formId]?.formOptions
+                                    ?.initialValues
+                            }
                             rowSelectionType={rowSelectionType}
+                            onCancelSubmit={handleCancel}
                         />
                     </Modal>
                 )}

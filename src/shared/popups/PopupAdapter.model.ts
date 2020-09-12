@@ -39,5 +39,6 @@ export interface PopupAdapterFormProps extends FormProps {
     onRequestFinish?: (err?: any, result?: any) => void
     deleteFormAction?: (id: number) => void
     rowSelectionType?: RowSelectionType
+    onCancelSubmit?: () => void
 }
 

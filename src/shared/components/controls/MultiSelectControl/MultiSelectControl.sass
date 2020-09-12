@@ -1,0 +1,194 @@
+@import '~shared/styles/const'
+@import '~shared/styles/controls'
+
+$selectRowTransition: 300ms
+$tagBgColor: #cd163f
+$tagFontSize: 14px
+$tagBorderRadius: 10px
+$tagAndOptionPadding: 8px 15px
+$tagItemElMargin: 5px
+$iconSize: 7px
+$itemColorListPool: rgba(0, 0, 0, 0.65)
+
+.multi-select-control 
+    width: 100%
+
+    .ant-select-selector 
+        border: 1px solid $g_input_border_color
+    
+
+    &_has-tags-cloud 
+        .ant-select-selection-item 
+            display: none
+        
+
+        .ant-select-selector 
+            &:before 
+                padding-left: 7px
+                color: #bfbfbf
+                content: 'Выберите вариант'
+            
+        
+
+        .ant-select-focused 
+            .ant-select-selector 
+                &:before 
+                    display: none
+                
+            
+
+        
+    
+
+    .multi-select-addon-after 
+        display: flex
+        align-items: center
+
+        .addon-after-content 
+            padding-left: 5px
+        
+    
+
+    &__dropdown 
+        padding: 0
+        border: 1px solid $g_input_border_color
+
+        .ant-select-tree-treenode 
+            padding: $tagAndOptionPadding
+            transition: $selectRowTransition
+
+            &:hover 
+                background-color: $g_select_row_bg_color_hover
+                color: var(--g_text_color)
+            
+
+            &-checkbox-checked 
+                color: #ffffff
+                background-color: $g_select_row_bg_color_checked
+                font-weight: normal
+
+                .ant-select-tree-checkbox-inner 
+                    background-color: transparent
+                    border: 0
+                
+            
+        
+
+        .ant-select-tree-treenode:hover 
+            background-color: $g_select_row_bg_color_hover
+        
+
+        .ant-select-tree-treenode-selected 
+            background-color: $g_select_row_bg_color_checked
+            color: #ffffff
+        
+
+        .ant-select-tree-node-content-wrapper.ant-select-tree-node-selected 
+            background-color: transparent
+        
+
+        .ant-select-tree-switcher 
+            .ant-select-tree-switcher-icon 
+                width: 24px
+                height: 24px
+                display: flex
+                align-items: center
+                justify-content: center
+            
+        
+
+        .ant-select-tree-node-content-wrapper 
+            transition: none
+
+            &:hover 
+                background-color: transparent
+            
+        
+
+        .ant-select-empty 
+            padding: 5px 12px
+        
+
+        &_select-all 
+            .ant-select-tree-checkbox-disabled 
+                display: none
+            
+
+            .ant-select-tree-treenode-disabled .ant-select-tree-node-content-wrapper 
+                padding: 0
+            
+
+            .select-all-option 
+                display: block
+                padding-left: 27px
+                color: var(--g_link_color)
+                cursor: pointer
+            
+        
+    
+
+
+.multi-select-tags 
+    margin-top: $tagItemElMargin * 2
+    display: flex
+    flex-wrap: wrap
+
+    &__item 
+        background-color: $tagBgColor
+        display: flex
+        align-items: center
+        font-size: $tagFontSize
+        color: #ffffff
+        padding: $tagAndOptionPadding
+        border-radius: $tagBorderRadius
+        margin-right: $tagItemElMargin
+        margin-bottom: $tagItemElMargin
+        line-height: 1
+        cursor: pointer
+
+        &:last-child 
+            margin-right: 0
+        
+
+        span 
+            margin-right: $tagItemElMargin
+        
+
+        i 
+            width: $iconSize
+            height: $iconSize
+            background-image: url(../../../image/icon-cancel.png)
+            background-repeat: no-repeat
+            display: inline-block
+            position: relative
+        
+    
+
+
+.multi-select-list 
+    display: flex
+    flex-direction: column
+    padding-left: 11px
+
+    &__item 
+        width: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        height: 25px
+
+        &:first-child 
+            margin-top: 5px
+        
+
+        div 
+            font-size: 14px
+            color: $itemColorListPool
+        
+    
+
+    &__btn-deselect 
+        color: $itemColorListPool
+        font-size: 12px
+    
+

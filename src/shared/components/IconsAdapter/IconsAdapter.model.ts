@@ -30,6 +30,7 @@ export type IconType =
     | 'BankOutlined'
     | 'DislikeOutlined'
     | 'PictureOutlined'
+    | 'EyeOutlined'
 
 export interface IconsAdapterProps
     extends Pick<

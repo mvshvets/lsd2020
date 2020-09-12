@@ -1,10 +1,11 @@
 import './MainMenu.sass'
 import React, { FC, useContext, useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
-import { MAIN_MENU_ITEMS } from './consts'
+import { MAIN_MENU_ITEMS } from './MainMenu.consts'
 import { ROUTE_NAMES } from 'routing'
 import { UserContext } from 'core/context'
 
+/** Главная страница */
 export const MainMenu: FC = React.memo(() => {
     const { userData } = useContext(UserContext)
 

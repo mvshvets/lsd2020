@@ -2,7 +2,6 @@ import './Header.sass'
 
 import React, { FC, useCallback, useContext, useState } from 'react'
 import { LoaderContext } from 'core/context'
-import Logo from 'shared/image/logo.png'
 import { useHistory } from 'react-router-dom'
 import { MainMenu } from './components'
 import { Button } from 'antd'
@@ -38,7 +37,7 @@ export const Header: FC = React.memo(() => {
     return (
         <header className="header">
             <Link to={ROUTE_NAMES.MAIN}>
-                <img src={Logo} alt="Логотип"/>
+                <h1><i>СВсП</i></h1>
             </Link>
             <div className="header__menu-wrapper">
                 <MainMenu/>

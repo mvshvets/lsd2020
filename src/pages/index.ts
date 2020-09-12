@@ -1,5 +1,6 @@
 export * from './Main'
 export * from './NotFound'
 export * from './Profile'
-export * from './Statistic'
 export * from './Categories'
+export * from './Questions'
+export * from './Subcategories'

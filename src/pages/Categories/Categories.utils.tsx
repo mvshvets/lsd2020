@@ -8,10 +8,10 @@ import { ROUTE_NAMES } from 'routing'
 import { Button } from 'antd'
 import { IconsAdapter, ButtonsToolbar } from 'shared/components'
 import { PopupAdapter } from 'shared/popups'
+import { CategoriesModel } from './Categories.model'
 
-export const renderCategoriesActions = (tableRow: any) => {
+export const renderCategoriesActions = (tableRow: CategoriesModel) => {
     return (
-        tableRow.active && (
             <ButtonsToolbar>
                 <Link
                     to={`${ROUTE_NAMES.CATALOGUE_EVENTS_EDIT}/${tableRow.id}`}
@@ -39,6 +39,5 @@ export const renderCategoriesActions = (tableRow: any) => {
                     }}
                 />
             </ButtonsToolbar>
-        )
     )
 }

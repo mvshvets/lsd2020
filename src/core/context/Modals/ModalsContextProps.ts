@@ -3,8 +3,8 @@ import { FormProps } from 'antd/lib/form'
 import { ModalProps } from 'antd/lib/modal'
 
 export interface ModalsContextProps {
-    modalsOptions: ModalsOptionsProps
-    setModalsOptions: Dispatch<SetStateAction<ModalsOptionsProps>>
+    popupAdapterOptions: ModalsOptionsProps
+    setPopupAdapterOptions: Dispatch<SetStateAction<ModalsOptionsProps>>
 }
 
 export interface ModalsOptionsProps {
@@ -18,7 +18,7 @@ export interface ModalsOptionsProps {
  * @param formOptions - props формы andt
  */
 export interface SingleModalProps {
-    visible: boolean
+    visible?: boolean
     recordCopy?: boolean
     modalOptions?: ModalProps
     formOptions?: FormProps

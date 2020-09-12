@@ -28,7 +28,8 @@ import {
     CloseCircleOutlined,
     BankOutlined,
     DislikeOutlined,
-    PictureOutlined
+    PictureOutlined,
+    EyeOutlined
 } from '@ant-design/icons'
 
 import { IconsAdapterProps } from './IconsAdapter.model'
@@ -70,6 +71,7 @@ export const IconsAdapter: React.FC<IconsAdapterProps> = React.memo(
             BankOutlined: <BankOutlined {...restProps} />,
             DislikeOutlined: <DislikeOutlined {...restProps} />,
             PictureOutlined: <PictureOutlined {...restProps} />,
+            EyeOutlined: <EyeOutlined {...restProps} />,
         }
 
         return <>{iconType ? iconsLibrary[iconType] : ''}</>

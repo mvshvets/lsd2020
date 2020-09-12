@@ -1,11 +1,12 @@
 import { ColumnsType } from 'antd/lib/table'
 import { renderCategoriesActions } from './Categories.utils'
+import { CategoriesModel } from './Categories.model'
 
-export const CATEGORIES_TABLE_COLUMNS: ColumnsType<any> = [
+export const CATEGORIES_TABLE_COLUMNS: ColumnsType<CategoriesModel> = [
     {
         title: 'Категория',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'title',
+        key: 'title',
     },
     {
         title: '',

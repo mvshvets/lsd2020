@@ -1,12 +1,22 @@
 import { RouteNamesProps } from './Routing.model'
 
+const PROFILE = 'profile'
+const STATISTIC = 'statistic'
+const CATEGORIES = 'categories'
+const SUBCATEGORIES = 'subcategories'
+const QUESTIONS = 'questions'
+
 export const ROUTE_NAMES: RouteNamesProps = {
     /** Главная страница */
     MAIN: '/',
     /** Личный кабинет */
-    PROFILE: '/profile',
+    PROFILE: `/${PROFILE}`,
     /** Статистика */
-    STATISTIC: '/statistic',
+    STATISTIC: `/${STATISTIC}`,
     /** Таблица категорий */
-    CATEGORIES: '/categories'
+    CATEGORIES: `/${CATEGORIES}`,
+    /** Таблица подкатегорий */
+    SUBCATEGORIES: `/${SUBCATEGORIES}`,
+    /** Таблица вопросов */
+    QUESTIONS: `/${QUESTIONS}`
 }
