@@ -8,7 +8,7 @@ const QUESTIONS = 'questions'
 
 export const ROUTE_NAMES: RouteNamesProps = {
     /** Главная страница */
-    MAIN: '/',
+    MAIN: '/lsd2020',
     /** Личный кабинет */
     PROFILE: `/${PROFILE}`,
     /** Статистика */
